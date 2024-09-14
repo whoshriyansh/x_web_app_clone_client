@@ -1,0 +1,52 @@
+name: Deploy React X Client
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.x"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker Image
+        run: docker build -t whoshriyansh/x-webapp-clone-client:latest .
+
+      - name: Push Docker Image
+        run: docker push whoshriyansh/x-webapp-clone-client:latest
+
+  deploy:
+    needs: build
+    runs-on: [x-clone-client-aws]
+    steps:
+      - name: Pull Docker Image
+        run: docker pull whoshriyansh/x-webapp-clone-client:latest
+
+      - name: Remove Old Container
+        run: |
+          docker stop react-app-container || true
+          docker rm react-app-container || true
+
+      - name: Run New Container
+        run: |
+          docker run -d \
+            -p 3000:3000 \
+            --name react-app-container \
+            whoshriyansh/x-webapp-clone-client:latest
