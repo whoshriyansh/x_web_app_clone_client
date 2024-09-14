@@ -34,7 +34,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [x-clone-client-aws]
+    runs-on: [aws-ec2-x-c]
     steps:
       - name: Pull Docker Image
         run: docker pull whoshriyansh/x-webapp-clone-client:latest
