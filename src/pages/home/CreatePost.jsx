@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { API_URL } from "../../../config";
 
 const CreatePost = () => {
   const [text, setText] = useState("");

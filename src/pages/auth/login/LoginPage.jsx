@@ -7,7 +7,6 @@ import { MdOutlineMail } from "react-icons/md";
 import { MdPassword } from "react-icons/md";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { API_URL } from "../../../../config";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({

@@ -12,7 +12,6 @@ import RightPanel from "./components/common/RightPanel";
 import { Toaster } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "./components/common/LoadingSpinner";
-import { API_URL } from "../config";
 
 function App() {
   const { data: authUser, isLoading } = useQuery({

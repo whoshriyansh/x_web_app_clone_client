@@ -10,7 +10,6 @@ import { toast } from "react-hot-toast";
 
 import LoadingSpinner from "./LoadingSpinner";
 import { formatPostDate } from "../../utils/date";
-import { API_URL } from "../../../config";
 
 const Post = ({ post }) => {
   const [comment, setComment] = useState("");

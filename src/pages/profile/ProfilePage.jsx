@@ -16,7 +16,6 @@ import { formatMemberSinceDate } from "../../utils/date";
 
 import useFollow from "../../hooks/useFollow";
 import useUpdateUserProfile from "../../hooks/useUpdateUserProfile";
-import { API_URL } from "../../../config";
 
 const ProfilePage = () => {
   const [coverImg, setCoverImg] = useState(null);

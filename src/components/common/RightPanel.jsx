@@ -5,7 +5,6 @@ import useFollow from "../../hooks/useFollow";
 
 import RightPanelSkeleton from "../skeletons/RightPanelSkeleton";
 import LoadingSpinner from "./LoadingSpinner";
-import { API_URL } from "../../../config";
 
 const RightPanel = () => {
   const { data: suggestedUsers, isLoading } = useQuery({
