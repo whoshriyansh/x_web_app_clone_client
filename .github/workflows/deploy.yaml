@@ -28,10 +28,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: docker build -t whoshriyansh/x-webapp-clone-client:latest .
+        run: docker build -t whoshriyansh/x-webapp-clone-client .
 
       - name: Push Docker Image
-        run: docker push whoshriyansh/x-webapp-clone-client:latest
+        run: docker push whoshriyansh/x-webapp-clone-client
 
   deploy:
     needs: build
@@ -42,15 +42,13 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Pull Docker Image
-        run: docker pull whoshriyansh/x-webapp-clone-client:latest
+        run: docker pull whoshriyansh/x-webapp-clone-client
 
       - name: Remove Old Container
         run: |
-          docker rm react-app-container || true
+          docker rm -f react-app-container || true
 
       - name: Run New Container
         run: |
-          docker run -d \
-            -p 3000:3000 \
-            --name react-app-container \
-            whoshriyansh/x-webapp-clone-client:latest
+          docker run -d -p 3000:80 --name react-app-container \
+          whoshriyansh/x-webapp-clone-client
