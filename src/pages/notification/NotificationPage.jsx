@@ -7,6 +7,7 @@ import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
+import config from "../../config";
 
 const NotificationPage = () => {
   const queryClient = useQueryClient();
@@ -14,9 +15,7 @@ const NotificationPage = () => {
     queryKey: ["notifications"],
     queryFn: async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/notifications`
-        );
+        const res = await fetch(`${config.apiUrl}/api/notifications`);
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Something went wrong");
         return data;
@@ -29,12 +28,9 @@ const NotificationPage = () => {
   const { mutate: deleteNotifications } = useMutation({
     mutationFn: async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/notifications`,
-          {
-            method: "DELETE",
-          }
-        );
+        const res = await fetch(`${config.apiUrl}/api/notifications`, {
+          method: "DELETE",
+        });
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Something went wrong");

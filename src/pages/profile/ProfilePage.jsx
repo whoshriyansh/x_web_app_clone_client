@@ -16,6 +16,7 @@ import { formatMemberSinceDate } from "../../utils/date";
 
 import useFollow from "../../hooks/useFollow";
 import useUpdateUserProfile from "../../hooks/useUpdateUserProfile";
+import config from "../../config";
 
 const ProfilePage = () => {
   const [coverImg, setCoverImg] = useState(null);
@@ -40,7 +41,7 @@ const ProfilePage = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/profile/${username}`
+          `${config.apiUrl}/api/users/profile/${username}`
         );
         const data = await res.json();
         if (!res.ok) {

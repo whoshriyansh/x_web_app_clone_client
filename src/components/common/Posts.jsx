@@ -2,20 +2,21 @@ import Post from "./Post";
 import PostSkeleton from "../skeletons/PostSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import config from "../../config";
 
 const Posts = ({ feedType, username, userId }) => {
   const getPostEndpoint = () => {
     switch (feedType) {
       case "forYou":
-        return `${import.meta.env.VITE_API_URL}/api/posts/all`;
+        return `${config.apiUrl}/api/posts/all`;
       case "following":
-        return `${import.meta.env.VITE_API_URL}/api/posts/following`;
+        return `${config.apiUrl}/api/posts/following`;
       case "posts":
-        return `${import.meta.env.VITE_API_URL}/api/posts/user/${username}`;
+        return `${config.apiUrl}/api/posts/user/${username}`;
       case "likes":
-        return `${import.meta.env.VITE_API_URL}/api/posts/likes/${userId}`;
+        return `${config.apiUrl}/api/posts/likes/${userId}`;
       default:
-        return `${import.meta.env.VITE_API_URL}/api/posts/all`;
+        return `${config.apiUrl}/api/posts/all`;
     }
   };
 
